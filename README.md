@@ -11,5 +11,13 @@ Now if you run your project with a debugger attached, you will be able to run th
 service from a window that pops up, else the service will run as is would without
 having the service helper installed.
 
-Note you can install the service helper easy using our NuGet package :<br />
-<code>install-package <strong>HexMaster.WindowsServiceHelper</strong></code>
+If you need your service to auto start immediately add in App.config<br/>
+<code>
+```xml
+<configuration>
+    <appSettings>
+        <add key="HexMaster:AutoStart" value="true"/>
+    </appSettings>
+</configuration>
+```
+</code>
