@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HexMaster.TestService
 {
@@ -12,15 +8,11 @@ namespace HexMaster.TestService
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread()]
+        [STAThread]
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-            { 
-                new Service1() 
-            };
-            HexMaster.Helper.Run(ServicesToRun);
+			ServiceBase[] servicesToRun = { new Service1() };
+	        Helper.Run(servicesToRun);
         }
     }
 }

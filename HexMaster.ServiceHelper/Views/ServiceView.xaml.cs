@@ -1,20 +1,9 @@
 ﻿using HexMaster.Types;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HexMaster.Views
 {
@@ -28,14 +17,12 @@ namespace HexMaster.Views
             InitializeComponent();
         }
 
-        private ServiceBase _service = null;
-
-
-
+        private ServiceBase _service;
+		
         public ServiceBase Service
         {
-            get { return _service; }
-            set
+            get => _service;
+	        set
             {
                 _service = value;
                 lblServiceName.Text = _service.ServiceName;
@@ -46,15 +33,13 @@ namespace HexMaster.Views
 
         private bool InvokeServiceMethod(ServiceCommands command)
         {
-            var success = false;
+            bool success;
             Type serviceBaseType = _service.GetType();
             object[] parameters = null;
-            if (command == ServiceCommands.Start)
-            {
-                parameters = new object[] { null };
-            }
+	        if (command == ServiceCommands.Start)
+		        parameters = new object[] {null};
 
-            string method = "OnStart";
+	        string method = "OnStart";
             switch (command)
             {
                 case ServiceCommands.Stop:
@@ -76,40 +61,50 @@ namespace HexMaster.Views
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("An exception was thrown while trying to call the {0} of the {1} service.  Examine the inner exception for more information.", method, _service.ServiceName), ex.InnerException);
+                throw new Exception(
+	                $"An exception was thrown while trying to call the {method} of the {_service.ServiceName} service.  Examine the inner exception for more information.", ex.InnerException);
             }
-            return success;
+            return true;
         }
 
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
+
+        public void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (InvokeServiceMethod(ServiceCommands.Start))
-            {
-                btnStop.IsEnabled = _service.CanStop;
-                btnPause.IsEnabled = _service.CanStop;
-                btnPlay.IsEnabled = false;
-            }
+	        Play();
         }
 
-        private void btnPause_Click(object sender, RoutedEventArgs e)
-        {
-            if (InvokeServiceMethod(ServiceCommands.Pause))
-            {
-                btnStop.IsEnabled = _service.CanStop;
-                btnPause.IsEnabled = false;
-                btnPlay.IsEnabled = true;
-            }
-        }
+	    private void btnPause_Click(object sender, RoutedEventArgs e)
+	    {
+		    Pause();
+	    }
 
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            if (InvokeServiceMethod(ServiceCommands.Stop))
-            {
-                btnStop.IsEnabled = false;
-                btnPause.IsEnabled = false;
-                btnPlay.IsEnabled = true;
-            }
-        }
+	    private void btnStop_Click(object sender, RoutedEventArgs e)
+	    {
+		    Stop();
+	    }
 
+	    public void Play()
+	    {
+		    if (!InvokeServiceMethod(ServiceCommands.Start)) return;
+		    btnStop.IsEnabled = _service.CanStop;
+		    btnPause.IsEnabled = _service.CanStop;
+		    btnPlay.IsEnabled = false;
+	    }
+
+	    private void Pause()
+	    {
+		    if (!InvokeServiceMethod(ServiceCommands.Pause)) return;
+		    btnStop.IsEnabled = _service.CanStop;
+		    btnPause.IsEnabled = false;
+		    btnPlay.IsEnabled = true;
+	    }
+
+	    private void Stop()
+	    {
+		    if (!InvokeServiceMethod(ServiceCommands.Stop)) return;
+		    btnStop.IsEnabled = false;
+		    btnPause.IsEnabled = false;
+		    btnPlay.IsEnabled = true;
+	    }
     }
 }
