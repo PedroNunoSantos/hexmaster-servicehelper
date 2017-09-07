@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.ServiceProcess;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -23,11 +21,13 @@ namespace HexMaster.Views
 			InitializeComponent();
 			SetupNotifyIcon();
 
-			string autoStartStr = ConfigurationManager.AppSettings["HexMaster:AutoStart"] ?? "";
+			string autoStartStr = ConfigurationManager.AppSettings["HexMaster.AutoStart"] ?? "";
 			AutoStart = autoStartStr.ToLower() == "true" || autoStartStr.ToLower() == "1";
+
 		}
 
 		public bool AutoStart { get; set; }
+		public bool Forcerun { get; set; }
 
 		public IEnumerable<ServiceBase> Services { get; set; }
 
@@ -65,6 +65,11 @@ namespace HexMaster.Views
 		}
 
 		private void frmMain_Loaded(object sender, RoutedEventArgs e)
+		{
+			StartServices();
+		}
+
+		private void StartServices()
 		{
 			if (!(Services?.Any() ?? false)) return;
 

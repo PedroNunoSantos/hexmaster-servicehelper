@@ -11,12 +11,15 @@ Now if you run your project with a debugger attached, you will be able to run th
 service from a window that pops up, else the service will run as is would without
 having the service helper installed.
 
-If you need your service to auto start immediately add in App.config<br/>
+## App.config
+If you need your services to start immediately use the flag **HexMaster.AutoStart=true**<br/>
+Use the **HexMaster.RunEvenIfNotAttached=true** and this helper will start even if the debugger is not attached<br/>
 <code>
 ```xml
 <configuration>
     <appSettings>
-        <add key="HexMaster:AutoStart" value="true"/>
+        <add key="HexMaster.AutoStart" value="true"/>
+        <add key="HexMaster.RunEvenIfNotAttached" value="true"/>
     </appSettings>
 </configuration>
 ```

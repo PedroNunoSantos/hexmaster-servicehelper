@@ -11,7 +11,7 @@ namespace HexMaster.TestService
         [STAThread]
         static void Main()
         {
-			ServiceBase[] servicesToRun = { new Service1() };
+			ServiceBase[] servicesToRun = { new Service1(), new Service1(), new Service1() };
 	        Helper.Run(servicesToRun);
         }
     }

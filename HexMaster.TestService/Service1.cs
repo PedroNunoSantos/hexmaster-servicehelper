@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.ServiceProcess;
+using System.Threading;
 
 namespace HexMaster.TestService
 {
@@ -12,12 +13,14 @@ namespace HexMaster.TestService
 
         protected override void OnStart(string[] args)
         {
+			Thread.Sleep(5000);
             Trace.WriteLine ("Service started");
         }
 
         protected override void OnStop()
         {
-            Trace.WriteLine("Service stopped");
+	        Thread.Sleep(5000);
+			Trace.WriteLine("Service stopped");
         }
     }
 }
