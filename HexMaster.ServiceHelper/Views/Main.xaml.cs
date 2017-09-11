@@ -4,10 +4,8 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceProcess;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace HexMaster.Views
 {
@@ -16,27 +14,32 @@ namespace HexMaster.Views
 	/// </summary>
 	public partial class Main
 	{
+		private System.Windows.Forms.NotifyIcon _ni;
+
 		public Main()
 		{
 			InitializeComponent();
-			SetupNotifyIcon();
+			AddNotifyIcon();
 
-			string autoStartStr = ConfigurationManager.AppSettings["HexMaster.AutoStart"] ?? "";
-			AutoStart = autoStartStr.ToLower() == "true" || autoStartStr.ToLower() == "1";
+			string AutoStartStr = ConfigurationManager.AppSettings["HexMaster.AutoStart"] ?? "";
+			AutoStart = AutoStartStr.ToLower() == "true" || AutoStartStr.ToLower() == "1";
+
+			string startMinimizedStr = ConfigurationManager.AppSettings["HexMaster.StartMinimized"] ?? "";
+			StartMinimized = startMinimizedStr.ToLower() == "true" || startMinimizedStr.ToLower() == "1";
 
 		}
 
+		public bool StartMinimized { get; set; }
 		public bool AutoStart { get; set; }
-		public bool Forcerun { get; set; }
-
+		
 		public IEnumerable<ServiceBase> Services { get; set; }
 
-		private void SetupNotifyIcon()
+		private void AddNotifyIcon()
 		{
-			var ni = new NotifyIcon();
-			ni.Visible = true;
-			ni.Icon = Properties.Resources.config;
-			ni.Click += (s, a) => SwitchWindowState();
+			_ni = new System.Windows.Forms.NotifyIcon();
+			_ni.Visible = true;
+			_ni.Icon = Properties.Resources.config;
+			_ni.Click += (s, a) => SwitchWindowState();
 		}
 
 		private void SwitchWindowState()
@@ -45,6 +48,11 @@ namespace HexMaster.Views
 			{
 				Hide();
 				WindowState = WindowState.Minimized;
+
+				_ni.ShowBalloonTip(2000
+					, "Hex Master Service Helper"
+					, "Hex Master is running.\nClick the icon to restore"
+					, System.Windows.Forms.ToolTipIcon.Info);
 			}
 			else
 			{
@@ -66,6 +74,9 @@ namespace HexMaster.Views
 
 		private void frmMain_Loaded(object sender, RoutedEventArgs e)
 		{
+			if (StartMinimized)
+				SwitchWindowState();
+
 			StartServices();
 		}
 
@@ -100,6 +111,22 @@ namespace HexMaster.Views
 		private void MinimizeButtonClick(object sender, RoutedEventArgs e)
 		{
 			SwitchWindowState();
+		}
+
+		private void HelpButtonClick(object sender, RoutedEventArgs e)
+		{
+			System.Windows.MessageBox.Show(@"<add key=""HexMaster.AutoStart"" value=""true""/>
+Starts immediately all services on startup
+
+<add key=""HexMaster.RunEvenIfNotAttached"" value=""true""/>
+Runs HexMaster even if debugger is not attached.
+Don't forget to remove when you release your software!
+
+<add key=""HexMaster.StartMinimized"" value=""true""/>
+Starts HexMaster minimized
+
+Ctrl+C to Copy");
+
 		}
 	}
 }

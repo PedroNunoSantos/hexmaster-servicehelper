@@ -15,14 +15,20 @@
 				</LinearGradientBrush>
 			</Border.Background>
 			<Grid>
-				<TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Margin="11,4,62,0" FontWeight="Thin"
-				           FontSize="18.667" Text="HexMaster Service Helper" />
+				<TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Margin="11,4,76,0" FontWeight="Thin"
+				           FontSize="16" Text="HexMaster Service Helper" />
 				<StackPanel x:Name="spServices" Margin="6,32,6,6">
 					<local:ServiceView VerticalAlignment="Top" />
 					<local:ServiceView />
 				</StackPanel>
+				<Button x:Name="btnHelp" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
+				        Margin="0,4,52,0" BorderBrush="{x:Null}" Click="HelpButtonClick">
+					<Button.Background>
+						<ImageBrush ImageSource="/HexMaster.ServiceHelper;component/Media/help.png" />
+					</Button.Background>
+				</Button>
 				<Button x:Name="btnMinimize" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
-				        Margin="0,4,33,0" BorderBrush="{x:Null}" Click="MinimizeButtonClick">
+				        Margin="0,4,28,0" BorderBrush="{x:Null}" Click="MinimizeButtonClick">
 					<Button.Background>
 						<ImageBrush ImageSource="/HexMaster.ServiceHelper;component/Media/minimize.png" />
 					</Button.Background>
