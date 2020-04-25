@@ -16,7 +16,7 @@ namespace ServiceDebugger.TestService
                 , new Service1()
                 , new Service1()
             };
-            
+
             servicesToRun.Run();
         }
     }

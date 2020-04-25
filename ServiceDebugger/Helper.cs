@@ -15,7 +15,7 @@ namespace ServiceDebugger
     {
         public static void Run(this IEnumerable<ServiceBase> services)
         {
-            string runEvenIfNotAttachedStr = ConfigurationManager.AppSettings["HexMaster.RunEvenIfNotAttached"] ?? "";
+            string runEvenIfNotAttachedStr = ConfigurationManager.AppSettings["ServiceDebugger.RunEvenIfNotAttached"] ?? "";
             bool runEvenIfNotAttached = runEvenIfNotAttachedStr.ToLower() == "true" || runEvenIfNotAttachedStr.ToLower() == "1";
 
             if (runEvenIfNotAttached || Debugger.IsAttached)

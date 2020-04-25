@@ -24,10 +24,10 @@ namespace ServiceDebugger.Views
 			InitializeComponent();
 			AddNotifyIcon();
 
-			string AutoStartStr = ConfigurationManager.AppSettings["HexMaster.AutoStart"] ?? "";
+			string AutoStartStr = ConfigurationManager.AppSettings["ServiceDebugger.AutoStart"] ?? "";
 			AutoStart = AutoStartStr.ToLower() == "true" || AutoStartStr.ToLower() == "1";
 
-			string startMinimizedStr = ConfigurationManager.AppSettings["HexMaster.StartMinimized"] ?? "";
+			string startMinimizedStr = ConfigurationManager.AppSettings["ServiceDebugger.StartMinimized"] ?? "";
 			StartMinimized = startMinimizedStr.ToLower() == "true" || startMinimizedStr.ToLower() == "1";
 
 		}
@@ -124,15 +124,15 @@ namespace ServiceDebugger.Views
 
 		private void HelpButtonClick(object sender, RoutedEventArgs e)
 		{
-			System.Windows.MessageBox.Show(@"<add key=""HexMaster.AutoStart"" value=""true""/>
+			System.Windows.MessageBox.Show(@"<add key=""ServiceDebugger.AutoStart"" value=""true""/>
 Starts immediately all services on startup
 
-<add key=""HexMaster.RunEvenIfNotAttached"" value=""true""/>
-Runs HexMaster even if debugger is not attached.
+<add key=""ServiceDebugger.RunEvenIfNotAttached"" value=""true""/>
+Runs ServiceDebugger even if debugger is not attached.
 Don't forget to remove when you release your software!
 
-<add key=""HexMaster.StartMinimized"" value=""true""/>
-Starts HexMaster minimized
+<add key=""ServiceDebugger.StartMinimized"" value=""true""/>
+Starts ServiceDebugger minimized
 
 Ctrl+C to Copy");
 

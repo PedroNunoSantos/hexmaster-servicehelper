@@ -17,7 +17,7 @@
 			</Border.Background>
                 <Grid>
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Margin="11,4,76,0" FontWeight="Thin"
-                               FontSize="16" Text="HexMaster Service Helper" />
+                               FontSize="16" Text="Service Debugger" />
                     <ScrollViewer Margin="6,32,6,6" VerticalScrollBarVisibility="Auto">
                         <StackPanel x:Name="spServices">
                             <views1:ServiceView VerticalAlignment="Top" />

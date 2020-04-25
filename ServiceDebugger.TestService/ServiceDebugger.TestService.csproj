@@ -61,8 +61,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HexMaster.ServiceHelper\ServiceDebugger.csproj">
-      <Project>{153fc4f0-0702-4a7d-88ab-b3d9d3489910}</Project>
+    <ProjectReference Include="..\ServiceDebugger\ServiceDebugger.csproj">
+      <Project>{749b2239-226e-44e4-aec1-746c8f499ac7}</Project>
       <Name>ServiceDebugger</Name>
     </ProjectReference>
   </ItemGroup>
