@@ -1,122 +1,113 @@
-﻿using HexMaster.Types;
-using System;
+﻿using System;
 using System.Reflection;
 using System.ServiceProcess;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using ServiceDebugger.Types;
 
-namespace HexMaster.Views
+namespace ServiceDebugger.Views
 {
-	/// <summary>
-	/// Interaction logic for ServiceView.xaml
-	/// </summary>
-	public partial class ServiceView : UserControl
-	{
-		public ServiceView()
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Interaction logic for ServiceView.xaml
+    /// </summary>
+    public partial class ServiceView
+    {
+        public ServiceView()
+        {
+            InitializeComponent();
+        }
 
-		private ServiceBase _service;
+        private ServiceBase _service;
 
-		public ServiceBase Service
-		{
-			get => _service;
-			set
-			{
-				_service = value;
-				lblServiceName.Text = _service.ServiceName;
-				btnPause.IsEnabled = false;
-				btnStop.IsEnabled = false;
-			}
-		}
+        public ServiceBase Service
+        {
+            get { return _service; }
+            set
+            {
+                _service = value;
+                lblServiceName.Text = _service.ServiceName;
+                btnPause.IsEnabled = false;
+                btnStop.IsEnabled = false;
+            }
+        }
 
-		private bool InvokeServiceMethod(ServiceCommands command)
-		{
-			Type serviceBaseType = _service.GetType();
-			object[] parameters = null;
-			if (command == ServiceCommands.Start)
-				parameters = new object[] { null };
+        private bool InvokeServiceMethod(ServiceCommands command)
+        {
+            Type serviceBaseType = _service.GetType();
+            object[] parameters = null;
+            if (command == ServiceCommands.Start)
+                parameters = new object[] { null };
 
-			string method = "OnStart";
-			switch (command)
-			{
-				case ServiceCommands.Stop:
-					method = "OnStop";
-					break;
-				case ServiceCommands.Pause:
-					method = "OnPause";
-					break;
-				case ServiceCommands.Start:
-				default:
-					method = "OnStart";
-					break;
-			}
+            string method = "OnStart";
+            switch (command)
+            {
+                case ServiceCommands.Stop:
+                    method = "OnStop";
+                    break;
+                case ServiceCommands.Pause:
+                    method = "OnPause";
+                    break;
+                case ServiceCommands.Start:
+                default:
+                    method = "OnStart";
+                    break;
+            }
 
-			try
-			{
-				serviceBaseType.InvokeMember(method,
-					BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod, null,
-					_service, parameters);
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(
-					$"An exception was thrown while trying to call the {method} of the {_service.ServiceName} service.  Examine the inner exception for more information.", ex.InnerException);
-			}
-			return true;
-		}
+            try
+            {
+                serviceBaseType.InvokeMember(method,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod, null,
+                    _service, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    $"An exception was thrown while trying to call the {method} of the {_service.ServiceName} service.  Examine the inner exception for more information.", ex.InnerException);
+            }
+            return true;
+        }
+        
+        public async void btnPlay_Click(object sender, RoutedEventArgs e) => await Play();
+        private async void btnPause_Click(object sender, RoutedEventArgs e) => await Pause();
+        private async void btnStop_Click(object sender, RoutedEventArgs e) => await Stop();
 
+        public async Task Play()
+        {
+            IsEnabled = false;
+            bool isDone = await Task.Run(() => InvokeServiceMethod(ServiceCommands.Start));
+            IsEnabled = true;
 
-		public void btnPlay_Click(object sender, RoutedEventArgs e) => Play();
+            if (!isDone) return;
+            btnStop.IsEnabled = _service.CanStop;
+            btnPause.IsEnabled = _service.CanPauseAndContinue;
+            btnPlay.IsEnabled = false;
 
-		private void btnPause_Click(object sender, RoutedEventArgs e) => Pause();
+        }
 
-		private void btnStop_Click(object sender, RoutedEventArgs e) => Stop();
+        private async Task Pause()
+        {
+            IsEnabled = false;
+            bool isDone = await Task.Run(() => InvokeServiceMethod(ServiceCommands.Pause));
+            IsEnabled = true;
 
-		public void Play()
-		{
-			IsEnabled = false;
-			Task.Run(() => InvokeServiceMethod(ServiceCommands.Start))
-				.ContinueWith(t =>
-				{
-					IsEnabled = true;
-					if (!t.Result) return;
-					btnStop.IsEnabled = _service.CanStop;
-					btnPause.IsEnabled = _service.CanStop;
-					btnPlay.IsEnabled = false;
-				}, TaskScheduler.FromCurrentSynchronizationContext());
-		}
+            if (!isDone) return;
+            btnStop.IsEnabled = _service.CanStop;
+            btnPause.IsEnabled = false;
+            btnPlay.IsEnabled = true;
+                
+        }
 
-		private void Pause()
-		{
-			IsEnabled = false;
-			Task.Run(() => InvokeServiceMethod(ServiceCommands.Pause))
-				.ContinueWith(t =>
-				{
-					IsEnabled = true;
-					if (!t.Result) return;
+        private async Task Stop()
+        {
+            IsEnabled = false;
+            bool isDone = await Task.Run(() => InvokeServiceMethod(ServiceCommands.Stop));
 
-					btnStop.IsEnabled = _service.CanStop;
-					btnPause.IsEnabled = false;
-					btnPlay.IsEnabled = true;
-				});
-		}
+            IsEnabled = true;
+            if (!isDone) return;
 
-		private void Stop()
-		{
-			IsEnabled = false;
-			Task.Run(() => InvokeServiceMethod(ServiceCommands.Start))
-				.ContinueWith(t =>
-				{
-					IsEnabled = true;
-					if (!t.Result) return;
-
-					btnStop.IsEnabled = false;
-					btnPause.IsEnabled = false;
-					btnPlay.IsEnabled = true;
-				} );
-		}
-	}
+            btnStop.IsEnabled = false;
+            btnPause.IsEnabled = false;
+            btnPlay.IsEnabled = true;
+        }
+    }
 }

@@ -2,7 +2,7 @@
 using System.ServiceProcess;
 using System.Threading;
 
-namespace HexMaster.TestService
+namespace ServiceDebugger.TestService
 {
     public partial class Service1 : ServiceBase
     {
@@ -13,14 +13,22 @@ namespace HexMaster.TestService
 
         protected override void OnStart(string[] args)
         {
-			Thread.Sleep(5000);
+			Thread.Sleep(1000);
             Trace.WriteLine ("Service started");
+
         }
 
         protected override void OnStop()
         {
-	        Thread.Sleep(5000);
+	        Thread.Sleep(1000);
 			Trace.WriteLine("Service stopped");
+        }
+
+
+        protected override void OnPause()
+        {
+            Thread.Sleep(1000);
+            Trace.WriteLine("Service stopped");
         }
     }
 }

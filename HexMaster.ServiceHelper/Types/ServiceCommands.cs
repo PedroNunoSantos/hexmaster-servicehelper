@@ -1,4 +1,4 @@
-﻿namespace HexMaster.Types
+﻿namespace ServiceDebugger.Types
 {
     public enum ServiceCommands
     {

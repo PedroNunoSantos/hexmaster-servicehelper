@@ -1,4 +1,4 @@
-﻿namespace HexMaster.TestService
+﻿namespace ServiceDebugger.TestService
 {
     partial class Service1
     {

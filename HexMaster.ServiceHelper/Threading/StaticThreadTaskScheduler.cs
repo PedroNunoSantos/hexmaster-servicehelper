@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HexMaster.Threading
+namespace ServiceDebugger.Threading
 {
     internal sealed class StaticThreadTaskScheduler : TaskScheduler, IDisposable
     {

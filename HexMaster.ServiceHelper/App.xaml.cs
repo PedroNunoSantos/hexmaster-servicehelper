@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace HexMaster.ServiceHelper
+namespace ServiceDebugger
 {
     /// <summary>
     /// Interaction logic for App.xaml

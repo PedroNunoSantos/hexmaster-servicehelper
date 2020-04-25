@@ -122,6 +122,6 @@
     <value>..\media\config.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 	<data name="Opacity" type="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-		<value>0.15</value>
+		<value>0.75</value>
 	</data>
 </root>
