@@ -3,9 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
-    
+    <Version>1.0.1</Version>
+    <Authors>Pedro Santos</Authors>
+    <Company>EventKey</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
