@@ -11,11 +11,7 @@ namespace ServiceDebugger.TestService
         [STAThread]
         static void Main()
         {
-            ServiceBase[] servicesToRun = {
-                new Service1()
-                , new Service1()
-                , new Service1()
-            };
+            ServiceBase[] servicesToRun = { new Service1(), new Service2(), new Service3() };
 
             servicesToRun.Run();
         }

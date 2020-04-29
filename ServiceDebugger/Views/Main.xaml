@@ -1,49 +1,59 @@
 ﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:views="clr-namespace:ServiceDebugger.Views" 
     xmlns:views1="clr-namespace:ServiceDebugger.Views"
+    xmlns:serviceDebugger="clr-namespace:ServiceDebugger"
     x:Name="frmMain" x:Class="ServiceDebugger.Views.Main"
-	Title="Main" Height="200" Width="300" AllowsTransparency="True" Background="Transparent" WindowStyle="None"
-	MinWidth="300" MinHeight="200" MouseDown="frmMain_MouseDown"
-	Loaded="frmMain_Loaded"  Topmost="True" Opacity="0.75" MouseEnter="frmMain_MouseEnter" MouseLeave="frmMain_MouseLeave">
-	<Grid x:Name="grdMain">
-		<Border x:Name="bdrMain" BorderBrush="Black" BorderThickness="2" CornerRadius="8">
-			<Border.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FFEEEEEE" />
-					<GradientStop Color="Gainsboro" Offset="1" />
-				</LinearGradientBrush>
-			</Border.Background>
-                <Grid>
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Margin="11,4,76,0" FontWeight="Thin"
+	Title="Main" Height="200" Width="300" AllowsTransparency="True" Background="Transparent" 
+    WindowStyle="None"
+    MinWidth="300" MinHeight="200" 
+	Loaded="frmMain_Loaded"  Topmost="True" Opacity="0.85" 
+    MouseEnter="frmMain_MouseEnter" MouseLeave="frmMain_MouseLeave"
+    serviceDebugger:EnableDragHelper.EnableDrag="True">
+    <Grid x:Name="grdMain" >
+        <Border x:Name="bdrMain" BorderBrush="Black" BorderThickness="2" CornerRadius="8">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFEEEEEE" />
+                    <GradientStop Color="Gainsboro" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Margin="11,4,108,0" FontWeight="Thin"
                                FontSize="16" Text="Service Debugger" />
-                    <ScrollViewer Margin="6,32,6,6" VerticalScrollBarVisibility="Auto">
-                        <StackPanel x:Name="spServices">
-                            <views1:ServiceView VerticalAlignment="Top" />
-                            <views1:ServiceView />
-                        </StackPanel>
-                    </ScrollViewer>
-                    <Button x:Name="btnHelp" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
-                            Margin="0,4,52,0" BorderBrush="{x:Null}" Click="HelpButtonClick">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/ServiceDebugger;component/Media/help.png" />
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="btnMinimize" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
-                            Margin="0,4,28,0" BorderBrush="{x:Null}" Click="MinimizeButtonClick">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/ServiceDebugger;component/Media/minimize.png" />
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="btnExit" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
+                <ScrollViewer Margin="6,32,6,6" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="spServices">
+                        <views1:ServiceView VerticalAlignment="Top" />
+                        <views1:ServiceView />
+                    </StackPanel>
+                </ScrollViewer>
+                <Button x:Name="btnHelp" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
+                        Margin="0,4,52,0" BorderBrush="{x:Null}" Click="HelpButtonClick">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/ServiceDebugger;component/Media/help.png" />
+                    </Button.Background>
+                </Button>
+
+                <Button x:Name="btnLog" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
+                        Margin="0,4,76,0" BorderBrush="{x:Null}" Click="LogButtonClick">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/ServiceDebugger;component/Media/log.png" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="btnMinimize" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
+                        Margin="0,4,28,0" BorderBrush="{x:Null}" Click="MinimizeButtonClick">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/ServiceDebugger;component/Media/minimize.png" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="btnExit" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24"
                             Margin="0,4,4,0" BorderBrush="{x:Null}" Click="ExitButtonClick">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/ServiceDebugger;component/Media/exit.png" />
-                        </Button.Background>
-                    </Button>
-                </Grid>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/ServiceDebugger;component/Media/exit.png" />
+                    </Button.Background>
+                </Button>
+            </Grid>
         </Border>
 
-	</Grid>
+    </Grid>
 </Window>

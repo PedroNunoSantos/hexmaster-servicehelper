@@ -4,9 +4,14 @@
     <TargetFramework>net46</TargetFramework>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <UseWPF>true</UseWPF>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
     <Authors>Pedro Santos</Authors>
     <Company>EventKey</Company>
+    <Product>Windows Service Debugger</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>A simple tool to help run and debug Windows Services
+forked from: https://github.com/nikneem/hexmaster-servicehelper</Description>
+    <RepositoryUrl>https://github.com/PedroNunoSantos/hexmaster-servicehelper</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,6 +31,12 @@
 
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Remove="Media\screenshot.png" />
+    <None Remove="Views\ConsoleLogWindow.xaml" />
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -34,6 +45,12 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ConsoleLogWindow.xaml.cs">
+      <DependentUpon>ConsoleLogWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
  
 </Project>

@@ -35,7 +35,7 @@
     								<VisualState x:Name="Normal">
     									<Storyboard>
     										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
-    											<EasingDoubleKeyFrame KeyTime="0" Value="0.75"/>
+    											<EasingDoubleKeyFrame KeyTime="0" Value="0.85"/>
     										</DoubleAnimationUsingKeyFrames>
     									</Storyboard>
     								</VisualState>

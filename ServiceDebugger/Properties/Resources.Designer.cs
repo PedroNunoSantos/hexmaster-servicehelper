@@ -71,7 +71,7 @@ namespace ServiceDebugger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Double similar to 0,75.
+        ///   Looks up a localized resource of type System.Double similar to 0,85.
         /// </summary>
         internal static double Opacity {
             get {
