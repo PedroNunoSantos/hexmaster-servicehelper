@@ -9,9 +9,6 @@ using ServiceDebugger.Wpf;
 
 namespace ServiceDebugger.Views
 {
-    /// <summary>
-    /// Interaction logic for ServiceView.xaml
-    /// </summary>
     public sealed partial class ServiceView : INotifyPropertyChanged
     {
         public ServiceView()
@@ -52,7 +49,7 @@ namespace ServiceDebugger.Views
             if (command == ServiceCommands.Start)
                 parameters = new object[] { null };
 
-            string method = "OnStart";
+            string method;
             switch (command)
             {
                 case ServiceCommands.Stop:
@@ -62,9 +59,10 @@ namespace ServiceDebugger.Views
                     method = "OnPause";
                     break;
                 case ServiceCommands.Start:
-                default:
                     method = "OnStart";
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(command), command, null);
             }
 
             try

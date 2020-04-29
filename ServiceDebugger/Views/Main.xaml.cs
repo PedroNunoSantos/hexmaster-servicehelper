@@ -78,7 +78,7 @@ namespace ServiceDebugger.Views
         private Task StartServices()
         {
             if (!(Services?.Any() ?? false))
-                return Task.FromResult(false); ;
+                return Task.FromResult(false);
 
             spServices.Children.Clear();
 

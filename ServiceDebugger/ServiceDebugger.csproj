@@ -19,7 +19,6 @@ forked from: https://github.com/nikneem/hexmaster-servicehelper</Description>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
     <Compile Update="Properties\Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />

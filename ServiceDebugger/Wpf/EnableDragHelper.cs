@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ServiceDebugger
+namespace ServiceDebugger.Wpf
 {
     //from: https://stackoverflow.com/a/35945363/4102099
     public class EnableDragHelper
