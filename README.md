@@ -1,6 +1,6 @@
 # ServiceDebugger
 
-![Screen Shot](.\Graphics\screenshot.png)
+![Screen Shot](Graphics/screenshot.png)
 
 Service Debugger is a helper utility that allows debugging Windows Services
 
