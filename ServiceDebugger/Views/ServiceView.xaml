@@ -22,17 +22,17 @@
             </TextBlock>
             <Button x:Name="btnPlay" Content="" Margin="0,0,56,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" BorderBrush="{x:Null}" Click="btnPlay_Click" Cursor="Hand">
                 <Button.Background>
-                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/play.png"/>
+                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/play.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
             <Button x:Name="btnPause" Content="" Margin="0,0,28,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" BorderBrush="{x:Null}" Click="btnPause_Click" IsEnabled="False" Cursor="Hand">
                 <Button.Background>
-                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/pause.png"/>
+                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/pause.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
             <Button x:Name="btnStop" Content="" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" BorderBrush="{x:Null}" Click="btnStop_Click" IsEnabled="False" Cursor="Hand">
                 <Button.Background>
-                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/stop.png"/>
+                    <ImageBrush ImageSource="/ServiceDebugger;component/Media/stop.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
 
